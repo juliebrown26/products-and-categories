@@ -1,0 +1,35 @@
+﻿@model IndexViewModel
+<div class="container" style="text-align: center;">
+    <div class="row" style="justify-content: center; margin: 25px">
+        <h1>Products  |  <a href="/categories">Categories</a></h1>
+    </div>
+    <div class="row">
+        <div class="col" style="border-right: 1pt solid black">
+            <h2 style="margin-bttom: 25px">New Product</h2>
+            <form asp-action="CreateProduct" asp-controller="Home" method="post">
+                <div class="form-group">
+                    <label asp-for="NewProduct.Name"></label>
+                    <input class="form-control" asp-for="NewProduct.Name">
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewProduct.Description"></label>
+                    <textarea class="form-control" rows="5" asp-for="NewProduct.Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewProduct.Price"></label>
+                    <input class="form-control" asp-for="NewProduct.Price">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <h2 style="margin-bottom: 25px">Existing Products</h2>
+            @foreach (Product item in Model.Products)
+            {
+                <h4><a href="/products/@item.ProductId">@item.Name</a></h4>
+            }
+        </div>
+    </div>
+</div>

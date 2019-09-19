@@ -1,0 +1,34 @@
+@model productscategories.Models.AssocCattoProdViewModel
+<div class="container">
+    <div class="row" style="justify-content: center; margin: 25px">
+        <h1>@Model.Product.Name</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Categories</h3>
+            <ul>
+                @foreach(Association item in Model.Product.Associations)
+                {
+                    <li>@item.Category.Name</li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <div class="row">
+                <h3>Add Category:</h3>
+            </div>
+            <form asp-action="AddCategory" asp-controller="Home" method="post">
+                <input hidden asp-for="Association.ProductId" value="@Model.Product.ProductId">
+                <div class="form-group">
+                    <select class="form-control" asp-for="Association.CategoryId">
+                        @foreach(Category item in Model.Categories)
+                        {  
+                            <option value="@item.CategoryId">@item.Name</option>  
+                        } 
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
